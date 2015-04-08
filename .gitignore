@@ -30,3 +30,9 @@
 
 # Debug files
 *.dSYM/
+
+#Atmel Studio Stuff
+Debug/
+*.cproj
+ASF/
+config/
