@@ -40,14 +40,14 @@ int main (void)
 	// Insert application code here, after the board has been initialized.
 	
 	/* Pin 0 of port B will be an output (where LED is) */
-	/* Pin 1 of port B will be an input (where button is) */
+	/* Pin 0 of port A will be an input (where button is) */
 	SET_BIT(DDRB, 0); 
-	CLR_BIT(DDRB, 1); 
+	CLR_BIT(DDRA, 0); 
 	
 	while (1)
 	{
 		/* If input from button is high (being pressed) turn on LED */
-		if (GET_BIT(PINB, 1)) {
+		if (GET_BIT(PINA, 0)) {
 			SET_BIT(PORTB, 0); /* Set Bit where LED is connected to high */
 			for (int i = 0; i < 10000; i++) {} /* Primitive wait function (remove when crystal is added) */
 				
