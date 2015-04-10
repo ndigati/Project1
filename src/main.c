@@ -30,6 +30,7 @@
  */
 #include <asf.h>
 #include <avr.h>
+#include <avr/io.h>
 
 int main (void)
 {
@@ -38,6 +39,11 @@ int main (void)
 	board_init();
 
 	// Insert application code here, after the board has been initialized.
+
+
+
+	/* Writing a 1 in the pin location in the DDRx makes the physical pin of that 
+	port an output pin and writing a 0 makes that pin an input pin. */
 	
 	/* Pin 0 of port B will be an output (where LED is) */
 	/* Pin 0 of port A will be an input (where button is) */
@@ -46,14 +52,25 @@ int main (void)
 	
 	while (1)
 	{
+		//SET_BIT(PORTB, 0);
 		/* If input from button is high (being pressed) turn on LED */
 		if (GET_BIT(PINA, 0)) {
-			SET_BIT(PORTB, 0); /* Set Bit where LED is connected to high */
+			PORTD = 0xFF;
+			/*SET_BIT(PORTB, 0); /* Set Bit where LED is connected to high */
 			for (int i = 0; i < 10000; i++) {} /* Primitive wait function (remove when crystal is added) */
 				
-			/* wait_avr(500); use this line when crystal is installed correctly */
+			/* wait_avr(500); use this line when crystal is installed correctly */*/
 			
 			CLR_BIT(PORTB, 0); /* Turn off light after waiting */
+		}
+		else if (!GET_BIT(PINA, 0)) {
+			PORTD = 0xFF;
+		}
+		else if (GET_BIT(PINA, 7)) {
+			PORTD = 0xFF;
+		}
+		else if (!GET_BIT(PINA, 7)) {
+			PORTD = 0xFF;
 		}
 	}
 	
